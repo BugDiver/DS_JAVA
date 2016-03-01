@@ -1,25 +1,38 @@
 package com.hashMapTest;
 
-import com.hashMap.MyHashMap;
+
 import org.junit.Test;
+import com.hashMap.MyHashMap;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by vinaysh on 01/03/16 at 12:18 PM.
- */
 
-public class MyHashMapTest {
+public class MyHashMapTest{
+    @Test
+    public void test_MyHashMap_should_create_a_list_with_0_length(){
+        MyHashMap<String ,String> list = new MyHashMap<>();
+        assertEquals(list.getLength() ,0);
+    }
+
     @Test
     public void test_MyHashMap_should_not_put_a_key_AS_null(){
         MyHashMap<String ,Integer> list = new MyHashMap<>();
         try{
             list.put(null ,5);
         }catch(RuntimeException e){
-            assertEquals(e.getMessage() ,"can't make null as key");
+            assertEquals(e.getMessage() ,"can't make null as key or value");
         }
     }
 
+    @Test
+    public void test_MyHashMap_should_not_put_a_value_AS_null(){
+        MyHashMap<String ,Integer> list = new MyHashMap<>();
+        try{
+            list.put("name",null);
+        }catch(RuntimeException e){
+            assertEquals(e.getMessage() ,"can't make null as key or value");
+        }
+    }
     @Test
     public void test_hash_map_should_put_key_value_pair() throws Exception {
         MyHashMap<String ,Integer> list = new MyHashMap<>();
@@ -53,17 +66,16 @@ public class MyHashMapTest {
     }
 
     @Test
-    public void test_hash_map_should_put_any_number_of_key_value_pair(){
-        MyHashMap<String, Integer> list = new MyHashMap<>();
-        list.put("a",2);
-        list.put("b",3);
-        list.put("c",4);
-        list.put("d",5);
-        list.put("e",6);
-        list.put("f",7);
-        list.put("g",8);
-        list.put("h",9);
-        list.put("i",10);
+    public void test_hash_should_also_able_to_remove_a_given_key() {
+        MyHashMap<String, String> list = new MyHashMap<>();
+        list.put("Me", "Vinay");
+        list.put("Freind", "Lalit");
+        assertEquals(list.getLength(), 2);
+
+        boolean status = list.remove("Freind");
+        assertTrue(status);
+        assertEquals(list.getLength(), 1);
+        assertEquals(list.get("Freind"), null);
 
     }
 }
