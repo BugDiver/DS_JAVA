@@ -6,7 +6,7 @@ package com.hashMap;
 public class Entry<K,V> {
     V value;
     K key;
-    public Entry<K,V> next;
+    Entry<K,V> next;
 
     public Entry(K key ,V value ,Entry<K,V> next) {
         this.key = key;
