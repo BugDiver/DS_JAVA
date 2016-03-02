@@ -15,23 +15,30 @@ public class MyHashMapTest{
     }
 
     @Test
-    public void test_MyHashMap_should_not_put_a_key_AS_null(){
+    public void test_MyHashMap_should_put_only_one_key_AS_null(){
         MyHashMap<String ,Integer> list = new MyHashMap<>();
-        try{
-            list.put(null ,5);
-        }catch(RuntimeException e){
-            assertEquals(e.getMessage() ,"can't make null as key or value");
-        }
+        list.put(null ,5);
+        assertEquals(list.getLength() ,1);
+        assertEquals((int)list.get(null) ,5);
     }
 
     @Test
-    public void test_MyHashMap_should_not_put_a_value_AS_null(){
+    public void test_MyHashMap_should_override_values_for_null_key(){
         MyHashMap<String ,Integer> list = new MyHashMap<>();
-        try{
-            list.put("name",null);
-        }catch(RuntimeException e){
-            assertEquals(e.getMessage() ,"can't make null as key or value");
-        }
+        list.put(null ,5);
+        assertEquals(list.getLength() ,1);
+        assertEquals((int)list.get(null) ,5);
+        list.put(null ,10);
+        assertEquals(list.getLength() ,1);
+        assertEquals((int)list.get(null) ,10);
+
+    }
+
+    @Test
+    public void test_MyHashMap_should_put_value_AS_null(){
+        MyHashMap<String ,Integer> list = new MyHashMap<>();
+        list.put("foo" , null);
+        assertEquals(list.get("foo") ,null);
     }
     @Test
     public void test_hash_map_should_put_key_value_pair() throws Exception {
